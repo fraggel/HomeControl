@@ -1,4 +1,6 @@
-package com.example.homecontrolapp;
+package es.fraggel.homecontrolapp;
+
+import com.example.homecontrolapp.R;
 
 import android.os.Bundle;
 import android.app.Activity;

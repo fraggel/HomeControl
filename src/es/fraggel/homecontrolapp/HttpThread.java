@@ -18,19 +18,15 @@ public class HttpThread extends AsyncTask<String, Void, String> {
         InputStreamReader isr = null;
         BufferedReader in = null;
         try {
-            URL jsonUrl = new URL("http://fraggel.dyndns.info:8080/HomeController/HomeControllerServlet?accion=4");
-            in = new BufferedReader(new InputStreamReader(jsonUrl.openStream()));
-            result = in.readLine();
-            urlActualizacion = in.readLine();
+            if("status".equals(params[0])){
+                URL jsonUrl = new URL("http://fraggel.dyndns.info:8080/HomeController/HomeControllerServlet?accion=4");
+                in = new BufferedReader(new InputStreamReader(jsonUrl.openStream()));
+                result = in.readLine();
+            }else if("calefaccion".equals(params[0])){
+                URL jsonUrl = new URL("http://fraggel.dyndns.info:8080/HomeController/HomeControllerServlet?accion=5&calefaccion=1");
+                in = new BufferedReader(new InputStreamReader(jsonUrl.openStream()));
+                result = in.readLine();
 
-            String updateContenidoAux="";
-            while( (updateContenidoAux = in.readLine()) != null)
-            {
-                updateContenido=updateContenido+updateContenidoAux+"----";
-            }
-
-            if (in != null) {
-                in.close();
             }
         } catch (Exception ex) {
             result = "TIMEOUT";
@@ -52,12 +48,7 @@ public class HttpThread extends AsyncTask<String, Void, String> {
                 }
             }
         }
-        String inicio = "";
-        if (params.length > 1) {
-            inicio = params[1];
-        }
-        result = result.replaceAll("\t", "").trim();
-        return inicio + "-;-" + result + "----" + urlActualizacion.trim()+"----"+updateContenido;
+       return result;
     }
 
     @Override

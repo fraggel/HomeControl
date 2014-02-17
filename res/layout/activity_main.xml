@@ -1,10 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BrowserActivity"
     android:layout_weight="20"
-    android:background="@android:color/black">
+    android:background="@android:color/black"
+    android:orientation="vertical">
 
 
         <!--<TextView
@@ -46,7 +47,30 @@
             android:layout_height="wrap_content"/>
 
 -->
-    <WebView
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Calefacción"
+        android:id="@+id/textView"
+        android:autoText="false"
+        android:textColor="@android:color/background_light" />
+    <Button
+        android:id="@+id/buttonStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Estado"
+        style="@style/ButtonTextGreen"
+        android:background="@drawable/btn_black"
+        android:clickable="false"/>
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        style="@style/LabelTextBlack"
+        android:background="@drawable/btn_white_border"/>
+    <!--<WebView
         android:id="@+id/webView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,6 +81,6 @@
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
         android:paddingTop="0dp"
-        android:background="@android:color/black"/>
+        android:background="@android:color/black"/>-->
 
-</RelativeLayout>
+</LinearLayout>

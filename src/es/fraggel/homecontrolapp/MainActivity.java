@@ -6,47 +6,71 @@ import android.view.Menu;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends Activity implements View.OnClickListener, AsyncResponse {
-    ToggleButton tgCalefaccion=null;
+    Button btnStatus=null;
+    Button btn=null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        String status="status";
+                /*if(tgCalefaccion.isChecked()){
+                    status="OFF";
+                }else if(!tgCalefaccion.isChecked()){
+                    status="ON";
+                }*/
+        HttpThread asyncTask = new HttpThread();
+        asyncTask.delegate = this;
+        asyncTask.execute(status);
         /*tgCalefaccion=(ToggleButton)findViewById(R.id.toggleButton1);
         tgCalefaccion.setOnClickListener(this);*/
+        btnStatus=(Button)findViewById(R.id.buttonStatus);
 
-        WebView wv=(WebView)findViewById(R.id.webView1);
+        btn=(Button)findViewById(R.id.button1);
+        btn.setOnClickListener(this);
+        /*WebView wv=(WebView)findViewById(R.id.webView1);
         wv.setEnabled(true);
         wv.setWebViewClient(new HomeControllerWebViewClient());
-        wv.loadUrl("http://fraggel.dyndns.info:8080/HomeController/LoginServlet?usuario=fraggel&contrasenya=ak47cold");
+        wv.loadUrl("http://fraggel.dyndns.info:8080/HomeController/LoginServlet?usuario=fraggel&contrasenya=ak47cold");*/
 
     }
 
     @Override
     public void onClick(View v) {
-        /*if(v.getId()==(R.id.toggleButton1)){
+
+        if(v.getId()==(R.id.button1)){
             try {
-                String status="OFF";
-                if(tgCalefaccion.isChecked()){
+                String status="calefaccion";
+                /*if(tgCalefaccion.isChecked()){
                     status="OFF";
                 }else if(!tgCalefaccion.isChecked()){
                     status="ON";
-                }
+                }*/
                 HttpThread asyncTask = new HttpThread();
                 asyncTask.delegate = this;
-                asyncTask.execute(status, "calefaccion");
+                asyncTask.execute(status);
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
             }
-        }*/
+        }
     }
 
     @Override
     public void processFinish(String output) {
-
+        if("calefaccion=OFF".equals(output)){
+            btnStatus.setBackground(getResources().getDrawable(R.drawable.btn_red));
+            btn.setText("Encender");
+        }else if("calefaccion=ON".equals(output)){
+            btnStatus.setBackground(getResources().getDrawable(R.drawable.btn_green));
+            btn.setText("Apagar");
+        }else{
+            btnStatus.setBackground(getResources().getDrawable(R.drawable.btn_black));
+            btn.setText("No se en qué estado está");
+        }
     }
 }
     class HomeControllerWebViewClient extends WebViewClient {

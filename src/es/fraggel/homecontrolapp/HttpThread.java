@@ -22,10 +22,28 @@ public class HttpThread extends AsyncTask<String, Void, String> {
                 URL jsonUrl = new URL("http://fraggel.dyndns.info:8080/HomeController/HomeControllerServlet?accion=4");
                 in = new BufferedReader(new InputStreamReader(jsonUrl.openStream()));
                 result = in.readLine();
+                result=result+"---"+in.readLine();
+                result=result+"---"+in.readLine();
             }else if("calefaccion".equals(params[0])){
                 URL jsonUrl = new URL("http://fraggel.dyndns.info:8080/HomeController/HomeControllerServlet?accion=5&calefaccion=1");
                 in = new BufferedReader(new InputStreamReader(jsonUrl.openStream()));
                 result = in.readLine();
+                result=result+"---"+in.readLine();
+                result=result+"---"+in.readLine();
+
+            }else if("aireSalon".equals(params[0])){
+                URL jsonUrl = new URL("http://fraggel.dyndns.info:8080/HomeController/HomeControllerServlet?accion=6&aireSalon=1");
+                in = new BufferedReader(new InputStreamReader(jsonUrl.openStream()));
+                result = in.readLine();
+                result=result+"---"+in.readLine();
+                result=result+"---"+in.readLine();
+
+            }else if("aireHabita".equals(params[0])){
+                URL jsonUrl = new URL("http://fraggel.dyndns.info:8080/HomeController/HomeControllerServlet?accion=6&aireHabitacion=1");
+                in = new BufferedReader(new InputStreamReader(jsonUrl.openStream()));
+                result = in.readLine();
+                result=result+"---"+in.readLine();
+                result=result+"---"+in.readLine();
 
             }
         } catch (Exception ex) {

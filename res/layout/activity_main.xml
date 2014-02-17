@@ -52,11 +52,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Calefacción"
-        android:id="@+id/textView"
+        android:id="@+id/txtCalefaccion"
         android:autoText="false"
         android:textColor="@android:color/background_light" />
     <Button
-        android:id="@+id/buttonStatus"
+        android:id="@+id/buttonStatusCalefaccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Estado"
@@ -64,7 +64,53 @@
         android:background="@drawable/btn_black"
         android:clickable="false"/>
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnCalefaccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        style="@style/LabelTextBlack"
+        android:background="@drawable/btn_white_border"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Aire Salón"
+        android:id="@+id/txtAireSalon"
+        android:autoText="false"
+        android:textColor="@android:color/background_light" />
+    <Button
+        android:id="@+id/buttonStatusAireSalon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Estado"
+        style="@style/ButtonTextGreen"
+        android:background="@drawable/btn_black"
+        android:clickable="false"/>
+    <Button
+        android:id="@+id/btnAireSalon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        style="@style/LabelTextBlack"
+        android:background="@drawable/btn_white_border"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Aire Habitación"
+        android:id="@+id/txtAireHabita"
+        android:autoText="false"
+        android:textColor="@android:color/background_light" />
+    <Button
+        android:id="@+id/buttonStatusAireHabita"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Estado"
+        style="@style/ButtonTextGreen"
+        android:background="@drawable/btn_black"
+        android:clickable="false"/>
+    <Button
+        android:id="@+id/btnAireHabita"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""

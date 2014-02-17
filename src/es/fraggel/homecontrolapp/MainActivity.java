@@ -11,8 +11,12 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends Activity implements View.OnClickListener, AsyncResponse {
-    Button btnStatus=null;
-    Button btn=null;
+    Button btnStatusCalefaccion=null;
+    Button btnCalefaccion=null;
+    Button btnStatusAireSalon=null;
+    Button btnAireSalon=null;
+    Button btnStatusAireHabita=null;
+    Button btnAireHabita=null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +32,17 @@ public class MainActivity extends Activity implements View.OnClickListener, Asyn
         asyncTask.execute(status);
         /*tgCalefaccion=(ToggleButton)findViewById(R.id.toggleButton1);
         tgCalefaccion.setOnClickListener(this);*/
-        btnStatus=(Button)findViewById(R.id.buttonStatus);
+        btnStatusCalefaccion=(Button)findViewById(R.id.buttonStatusCalefaccion);
+        btnCalefaccion=(Button)findViewById(R.id.btnCalefaccion);
+        btnCalefaccion.setOnClickListener(this);
 
-        btn=(Button)findViewById(R.id.button1);
-        btn.setOnClickListener(this);
+        btnStatusAireSalon=(Button)findViewById(R.id.buttonStatusAireSalon);
+        btnAireSalon=(Button)findViewById(R.id.btnAireSalon);
+        btnAireSalon.setOnClickListener(this);
+
+        btnStatusAireHabita=(Button)findViewById(R.id.buttonStatusAireHabita);
+        btnAireHabita=(Button)findViewById(R.id.btnAireHabita);
+        btnAireHabita.setOnClickListener(this);
         /*WebView wv=(WebView)findViewById(R.id.webView1);
         wv.setEnabled(true);
         wv.setWebViewClient(new HomeControllerWebViewClient());
@@ -42,9 +53,39 @@ public class MainActivity extends Activity implements View.OnClickListener, Asyn
     @Override
     public void onClick(View v) {
 
-        if(v.getId()==(R.id.button1)){
+        if(v.getId()==(R.id.btnCalefaccion)){
             try {
                 String status="calefaccion";
+                /*if(tgCalefaccion.isChecked()){
+                    status="OFF";
+                }else if(!tgCalefaccion.isChecked()){
+                    status="ON";
+                }*/
+                HttpThread asyncTask = new HttpThread();
+                asyncTask.delegate = this;
+                asyncTask.execute(status);
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if(v.getId()==(R.id.btnAireSalon)){
+            try {
+                String status="aireSalon";
+                /*if(tgCalefaccion.isChecked()){
+                    status="OFF";
+                }else if(!tgCalefaccion.isChecked()){
+                    status="ON";
+                }*/
+                HttpThread asyncTask = new HttpThread();
+                asyncTask.delegate = this;
+                asyncTask.execute(status);
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if(v.getId()==(R.id.btnAireHabita)){
+            try {
+                String status="aireHabita";
                 /*if(tgCalefaccion.isChecked()){
                     status="OFF";
                 }else if(!tgCalefaccion.isChecked()){
@@ -61,16 +102,52 @@ public class MainActivity extends Activity implements View.OnClickListener, Asyn
 
     @Override
     public void processFinish(String output) {
-        if("calefaccion=OFF".equals(output)){
-            btnStatus.setBackground(getResources().getDrawable(R.drawable.btn_red));
-            btn.setText("Encender");
-        }else if("calefaccion=ON".equals(output)){
-            btnStatus.setBackground(getResources().getDrawable(R.drawable.btn_green));
-            btn.setText("Apagar");
+        String vuelta[]=output.split("---");
+        if(vuelta.length>1){
+            if("calefaccion=OFF".equals(vuelta[0])){
+                btnStatusCalefaccion.setBackground(getResources().getDrawable(R.drawable.btn_red));
+                btnCalefaccion.setText("Encender");
+            }else if("calefaccion=ON".equals(vuelta[0])){
+                btnStatusCalefaccion.setBackground(getResources().getDrawable(R.drawable.btn_green));
+                btnCalefaccion.setText("Apagar");
+            }else{
+                btnStatusCalefaccion.setBackground(getResources().getDrawable(R.drawable.btn_black));
+                btnCalefaccion.setText("No se en qué estado está");
+            }
+            if("aireSalon=OFF".equals(vuelta[1])){
+                btnStatusAireSalon.setBackground(getResources().getDrawable(R.drawable.btn_red));
+                btnAireSalon.setText("Encender");
+            }else if("aireSalon=ON".equals(vuelta[1])){
+                btnStatusAireSalon.setBackground(getResources().getDrawable(R.drawable.btn_green));
+                btnAireSalon.setText("Apagar");
+            }else{
+                btnStatusAireSalon.setBackground(getResources().getDrawable(R.drawable.btn_black));
+                btnAireSalon.setText("No se en qué estado está");
+            }
+            if("aireHabita=OFF".equals(vuelta[2])){
+                btnStatusAireHabita.setBackground(getResources().getDrawable(R.drawable.btn_red));
+                btnAireHabita.setText("Encender");
+            }else if("aireHabita=ON".equals(vuelta[2])){
+                btnStatusAireHabita.setBackground(getResources().getDrawable(R.drawable.btn_green));
+                btnAireHabita.setText("Apagar");
+            }else{
+                btnStatusAireHabita.setBackground(getResources().getDrawable(R.drawable.btn_black));
+                btnAireHabita.setText("No se en qué estado está");
+            }
         }else{
-            btnStatus.setBackground(getResources().getDrawable(R.drawable.btn_black));
-            btn.setText("No se en qué estado está");
+            btnStatusCalefaccion.setBackground(getResources().getDrawable(R.drawable.btn_black));
+            btnCalefaccion.setText("No se en qué estado está");
+            btnStatusAireSalon.setBackground(getResources().getDrawable(R.drawable.btn_black));
+            btnAireSalon.setText("No se en qué estado está");
+            btnStatusAireHabita.setBackground(getResources().getDrawable(R.drawable.btn_black));
+            btnAireHabita.setText("No se en qué estado está");
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 }
     class HomeControllerWebViewClient extends WebViewClient {
